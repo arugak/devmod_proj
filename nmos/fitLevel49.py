@@ -1,11 +1,9 @@
-from pyEDA.Compact.MOSParamFit import *
 from pyEDA.Compact.AuroraData import *
-import math
-import numpy as np
-from matplotlib import pyplot
+from pyEDA.Compact.MOSParamFit import *
 
 from BSIM3v3Param import *
 from MOSp35Data import *
+
 
 class MOSp35Proj(MOSp35Data):
     def __init__(self, param0):
@@ -63,7 +61,7 @@ class MOSp35Proj(MOSp35Data):
     def step40(self):
         targets = ['K3', 'W0', 'WINT', 'DWG']
         fit = MOS_IV_Fit(self.param, targets, 'Step 4')
-        fit.setDataSource(self.IdVg_LW_lin_b0 + 10.0 * self.IdVg_LN_lin_b0)
+        fit.setDataSource(self.IdVg_LW_lin_b0 + 8.3 * self.IdVg_LN_lin_b0)
 
         result,err = fit.doFit()
         fit.visualize(result, timeout=0.0)
@@ -137,7 +135,7 @@ class MOSp35Proj(MOSp35Data):
                           0.1 *self.IdVg_MW_lin_b0 +
                           0.05*self.IdVg_SW_lin_b0 +
                           10. *self.IdVg_LN_lin_b0 +
-                          2.0*self.IdVg_SN_lin_b0)
+                          2.0*self.IdVg_LM_lin_b0)
 
         result,err = fit.doFit()
         fit.visualize(result, timeout=0.0)
@@ -151,7 +149,7 @@ class MOSp35Proj(MOSp35Data):
                           0.1 *self.IdVg_MW_lin_ba +
                           0.05*self.IdVg_SW_lin_ba +
                           10. *self.IdVg_LN_lin_ba +
-                          2.0*self.IdVg_SN_lin_ba)
+                          2.0*self.IdVg_LM_lin_ba)
 
         result,err = fit.doFit()
         fit.visualize(result, timeout=0.0)
@@ -319,5 +317,5 @@ param0['TEMP']=25.
 param0['TNOM']=25.
 
 proj = MOSp35Proj(param0)
-proj.run(0,30)
+proj.run(0,120)
 
