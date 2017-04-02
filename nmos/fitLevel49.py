@@ -173,11 +173,12 @@ class MOSp35Proj(MOSp35Data):
         fit = MOS_IV_Fit(self.param, targets, 'Step 13-2')
         fit.setDataSource(     self.IdVg_LW_sat_ba+ 
                           0.1 *self.IdVg_MW_sat_ba+
-                          0.05*self.IdVg_SW_sat_ba+
-                               self.IdVg_LW_d1_ba+ 
+                          0.05*self.IdVg_SW_sat_ba)
+        '''
+                               self.IdVg_LW_d1_ba+
                           0.1 *self.IdVg_MW_d1_ba+
                           0.05*self.IdVg_SW_d1_ba)
-
+        '''
 
         result,err = fit.doFit()
         fit.visualize(result, timeout=0.0)
@@ -237,10 +238,10 @@ class MOSp35Proj(MOSp35Data):
         fit = MOS_IV_Fit(self.param, targets, 'Step 17')
         fit.setDataSource(     self.IdVg_LW_sat_b0+ 
                           0.1 *self.IdVg_MW_sat_b0+
-                          0.05*self.IdVg_SW_sat_b0+
-                               self.IdVg_LW_d1_b0+ 
-                          0.1 *self.IdVg_MW_d1_b0+
-                          0.05*self.IdVg_SW_d1_b0)
+                          0.05*self.IdVg_SW_sat_b0)
+                         #     self.IdVg_LW_d1_b0+
+                         #0.1 *self.IdVg_MW_d1_b0+
+                         #0.05*self.IdVg_SW_d1_b0)
 
         result,err = fit.doFit()
         fit.visualize(result, timeout=0.0)
@@ -252,10 +253,10 @@ class MOSp35Proj(MOSp35Data):
         fit = MOS_IV_Fit(self.param, targets, 'Step 18')
         fit.setDataSource(     self.IdVg_LW_sat_ba+ 
                           0.1 *self.IdVg_MW_sat_ba+
-                          0.05*self.IdVg_SW_sat_ba+
-                               self.IdVg_LW_d1_ba+ 
-                          0.1 *self.IdVg_MW_d1_ba+
-                          0.05*self.IdVg_SW_d1_ba)
+                          0.05*self.IdVg_SW_sat_ba)
+                         #     self.IdVg_LW_d1_ba+
+                         #0.1 *self.IdVg_MW_d1_ba+
+                         #0.05*self.IdVg_SW_d1_ba)
 
         result,err = fit.doFit()
         fit.visualize(result, timeout=0.0)
@@ -267,10 +268,10 @@ class MOSp35Proj(MOSp35Data):
         fit = MOS_IV_Fit(self.param, targets, 'Step 19')
         fit.setDataSource(     self.IdVg_LW_sat_b0+ 
                           0.1 *self.IdVg_MW_sat_b0+
-                          0.05*self.IdVg_SW_sat_b0+
-                               self.IdVg_LW_d1_b0+ 
-                          0.1 *self.IdVg_MW_d1_b0+
-                          0.05*self.IdVg_SW_d1_b0)
+                          0.05*self.IdVg_SW_sat_b0)
+                         #     self.IdVg_LW_d1_b0+
+                         #0.1 *self.IdVg_MW_d1_b0+
+                         #0.05*self.IdVg_SW_d1_b0)
 
         result,err = fit.doFit()
         fit.visualize(result, timeout=0.0)
@@ -282,10 +283,10 @@ class MOSp35Proj(MOSp35Data):
         fit = MOS_IV_Fit(self.param, targets, 'Step 20')
         fit.setDataSource(     self.IdVg_LW_sat_b0+ 
                           0.1 *self.IdVg_MW_sat_b0+
-                          0.05*self.IdVg_SW_sat_b0+
-                               self.IdVg_LW_d1_b0+ 
-                          0.1 *self.IdVg_MW_d1_b0+
-                          0.05*self.IdVg_SW_d1_b0)
+                          0.05*self.IdVg_SW_sat_b0)
+                         #     self.IdVg_LW_d1_b0+
+                         #0.1 *self.IdVg_MW_d1_b0+
+                         #0.05*self.IdVg_SW_d1_b0)
 
         fit.dataSrc.setSubVth(True)
         result,err = fit.doFit()
@@ -299,10 +300,10 @@ class MOSp35Proj(MOSp35Data):
         fit = MOS_IV_Fit(self.param, targets, 'Step 20-5')
         fit.setDataSource(     self.IdVg_LW_sat_ba+ 
                           0.1 *self.IdVg_MW_sat_ba+
-                          0.05*self.IdVg_SW_sat_ba+
-                               self.IdVg_LW_d1_ba+ 
-                          0.1 *self.IdVg_MW_d1_ba+
-                          0.05*self.IdVg_SW_d1_ba)
+                          0.05*self.IdVg_SW_sat_ba)
+                         #     self.IdVg_LW_d1_ba+
+                         #0.1 *self.IdVg_MW_d1_ba+
+                         #0.05*self.IdVg_SW_d1_ba)
 
         fit.dataSrc.setSubVth(True)
         result,err = fit.doFit()
@@ -317,5 +318,5 @@ param0['TEMP']=25.
 param0['TNOM']=25.
 
 proj = MOSp35Proj(param0)
-proj.run(0,120)
+proj.run()
 
