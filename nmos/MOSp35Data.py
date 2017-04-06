@@ -17,35 +17,35 @@ class MOSp35Data(MOS_FitProject):
         ds = self.datasets['n1.gtr']
         dsrc.addCurve(ds.mosID(), ds.getCurve('Vgs', {'Vbs':0.,    'Vds':0.05}, 'Id'))
         self.IdVg_SW_lin_b0 = dsrc
-        self.IdVg_SW_lin_b0.curr_min = 1e-8
+        self.IdVg_SW_lin_b0.curr_min = 1e-9
 
         # Idvg, mid/wide, linear region, zero Vb
         dsrc = MOS_IV_FitData('Idvg, mid/wide, linear region, zero Vb')
         ds = self.datasets['n2.gtr']
         dsrc.addCurve(ds.mosID(), ds.getCurve('Vgs', {'Vbs':0.,    'Vds':0.05}, 'Id'))
         self.IdVg_MW_lin_b0 = dsrc
-        self.IdVg_MW_lin_b0.curr_min = 1e-8
+        self.IdVg_MW_lin_b0.curr_min = 1e-9
 
         # Idvg, long/wide, linear region, zero Vb
         dsrc = MOS_IV_FitData('Idvg, long/wide, linear region, zero Vb')
         ds = self.datasets['n3.gtr']
         dsrc.addCurve(ds.mosID(), ds.getCurve('Vgs', {'Vbs':0.,    'Vds':0.05}, 'Id'))
         self.IdVg_LW_lin_b0 = dsrc
-        self.IdVg_LW_lin_b0.curr_min = 1e-8
+        self.IdVg_LW_lin_b0.curr_min = 1e-9
 
         # Idvg, long/mid, linear region, zero Vb
         dsrc = MOS_IV_FitData('Idvg, long/mid, linear region, zero Vb')
         ds = self.datasets['n4.gtr']
         dsrc.addCurve(ds.mosID(), ds.getCurve('Vgs', {'Vbs':0.,    'Vds':0.05}, 'Id'))
         self.IdVg_LM_lin_b0 = dsrc
-        self.IdVg_LM_lin_b0.curr_min = 1e-8
+        self.IdVg_LM_lin_b0.curr_min = 1e-9
 
         # Idvg, long/narrow, linear region, zero Vb
         dsrc = MOS_IV_FitData('Idvg, long/narrow, linear region, zero Vb')
         ds = self.datasets['n5.gtr']
         dsrc.addCurve(ds.mosID(), ds.getCurve('Vgs', {'Vbs':0.,    'Vds':0.05}, 'Id'))
         self.IdVg_LN_lin_b0 = dsrc
-        self.IdVg_LN_lin_b0.curr_min = 1e-8
+        self.IdVg_LN_lin_b0.curr_min = 1e-9
 
         # ---
         # Idvg, short/wide, saturation region, zero Vb
@@ -109,7 +109,7 @@ class MOSp35Data(MOS_FitProject):
         dsrc.addCurve(ds.mosID(), ds.getCurve('Vgs', {'Vbs':-3.0, 'Vds': 0.05}, 'Id'))
         ds = self.datasets['n1.gtr']
         self.IdVg_SW_lin_ba = dsrc
-        self.IdVg_SW_lin_ba.curr_min = 1e8
+        self.IdVg_SW_lin_ba.curr_min = 1e-9
 
         # IdVg, mid/wide, linear region, all Vb
         dsrc = MOS_IV_FitData('IdVg, mid/wide, linear region, all Vb')
@@ -122,7 +122,7 @@ class MOSp35Data(MOS_FitProject):
         dsrc.addCurve(ds.mosID(), ds.getCurve('Vgs', {'Vbs':-2.5, 'Vds': 0.05}, 'Id'))
         dsrc.addCurve(ds.mosID(), ds.getCurve('Vgs', {'Vbs':-3.0, 'Vds': 0.05}, 'Id'))
         self.IdVg_MW_lin_ba = dsrc
-        self.IdVg_MW_lin_ba.curr_min = 1e8
+        self.IdVg_MW_lin_ba.curr_min = 1e-9
 
         # ---
         # IdVg, long/wide, linear region, all Vb
@@ -136,7 +136,7 @@ class MOSp35Data(MOS_FitProject):
         dsrc.addCurve(ds.mosID(), ds.getCurve('Vgs', {'Vbs':-2.5, 'Vds': 0.05}, 'Id'))
         dsrc.addCurve(ds.mosID(), ds.getCurve('Vgs', {'Vbs':-3.0, 'Vds': 0.05}, 'Id'))
         self.IdVg_LW_lin_ba = dsrc
-        self.IdVg_LW_lin_ba.curr_min = 1e-8
+        self.IdVg_LW_lin_ba.curr_min = 1e-9
 
         # IdVg, long/mid, linear region, all Vb
         dsrc = MOS_IV_FitData('IdVg, long/mid, linear region, all Vb')
@@ -149,7 +149,7 @@ class MOSp35Data(MOS_FitProject):
         dsrc.addCurve(ds.mosID(), ds.getCurve('Vgs', {'Vbs':-2.5, 'Vds': 0.05}, 'Id'))
         dsrc.addCurve(ds.mosID(), ds.getCurve('Vgs', {'Vbs':-3.0, 'Vds': 0.05}, 'Id'))
         self.IdVg_LM_lin_ba = dsrc
-        self.IdVg_LM_lin_ba.curr_min = 1e8
+        self.IdVg_LM_lin_ba.curr_min = 1e-9
 
         # IdVg, long/narrow, linear region, all Vb
         dsrc = MOS_IV_FitData('IdVg, long/narrow, linear region, all Vb')
@@ -162,7 +162,7 @@ class MOSp35Data(MOS_FitProject):
         dsrc.addCurve(ds.mosID(), ds.getCurve('Vgs', {'Vbs':-2.5, 'Vds': 0.05}, 'Id'))
         dsrc.addCurve(ds.mosID(), ds.getCurve('Vgs', {'Vbs':-3.0, 'Vds': 0.05}, 'Id'))
         self.IdVg_LN_lin_ba = dsrc
-        self.IdVg_LN_lin_ba.curr_min = 1e8
+        self.IdVg_LN_lin_ba.curr_min = 1e-9
 
         '''
         #---
