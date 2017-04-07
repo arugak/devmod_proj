@@ -62,7 +62,7 @@ class MOSp35Proj(MOSp35Data):
         # narrow width effect
         # dVth_nrw = (self.K3 + self.K3B * Vbseff) * self.TOX / (Weff0 + self.W0) * phi
         #targets = ['K3', 'WINT', 'DWG']
-        targets = ['K3', 'WW', 'WWN', 'DWG', 'U0']
+        targets = ['K3', 'WINT', 'DWG', 'U0']
         fit = MOS_IV_Fit(self.param, targets, 'Step 4')
         fit.setDataSource(    1 * self.IdVg_LW_lin_b0
                           +   5 * self.IdVg_LM_lin_b0
@@ -89,10 +89,9 @@ class MOSp35Proj(MOSp35Data):
         return result, err
 
     def step70(self):
-        # targets = ['LINT', 'RDSW', 'DVT0', 'DVT1', 'DVT2', 'NLX']
-        targets = ['LINT', 'RDSW', 'DVT0']
+        targets = ['LINT', 'RDSW', 'DVT0', 'DVT1', 'DVT2', 'NLX']
         fit = MOS_IV_Fit(self.param, targets, 'Step 7')
-        fit.setDataSource(self.IdVg_LW_lin_ba + 0.1*self.IdVg_MW_lin_ba + 0.05*self.IdVg_SW_lin_ba)
+        fit.setDataSource(0*self.IdVg_LW_lin_ba + 0.1*self.IdVg_MW_lin_ba + 0.05*self.IdVg_SW_lin_ba)
 
         result,err = fit.doFit()
         fit.visualize(result, timeout=0.0)
@@ -103,7 +102,7 @@ class MOSp35Proj(MOSp35Data):
     def step80(self):
         targets = ['LINT', 'RDSW', 'PRWG']
         fit = MOS_IV_Fit(self.param, targets, 'Step 8')
-        fit.setDataSource(self.IdVg_LW_lin_b0 + 0.1*self.IdVg_MW_lin_b0 + 0.05*self.IdVg_SW_lin_b0)
+        fit.setDataSource(0*self.IdVg_LW_lin_b0 + 0.1*self.IdVg_MW_lin_b0 + 0.05*self.IdVg_SW_lin_b0)
 
         result,err = fit.doFit()
         fit.visualize(result, timeout=0.0)
@@ -112,7 +111,7 @@ class MOSp35Proj(MOSp35Data):
         return result, err
 
     def step90(self):
-        targets = ['PRWB']
+        targets = ['LINT', 'PRWB', 'DVT0', 'DVT1', 'DVT2']
         fit = MOS_IV_Fit(self.param, targets, 'Step 9')
         fit.setDataSource(self.IdVg_LW_lin_ba + 0.1*self.IdVg_MW_lin_ba + 0.05*self.IdVg_SW_lin_ba)
 
@@ -139,11 +138,11 @@ class MOSp35Proj(MOSp35Data):
     def step110(self):
         targets = ['RDSW', 'WR', 'PRWG']
         fit = MOS_IV_Fit(self.param, targets, 'Step 11')
-        fit.setDataSource(     self.IdVg_LW_lin_b0 + 
-                          0.1 *self.IdVg_MW_lin_b0 +
-                          0.05*self.IdVg_SW_lin_b0 +
-                          10. *self.IdVg_LN_lin_b0 +
-                          2.0*self.IdVg_LM_lin_b0)
+        fit.setDataSource(       self.IdVg_LW_lin_b0 +
+                          0.1  * self.IdVg_MW_lin_b0 +
+                          0.05 * self.IdVg_SW_lin_b0 +
+                          5.   * self.IdVg_LM_lin_b0 +
+                          10.  * self.IdVg_LN_lin_b0)
 
         result,err = fit.doFit()
         fit.visualize(result, timeout=0.0)
@@ -153,11 +152,11 @@ class MOSp35Proj(MOSp35Data):
     def step120(self):
         targets = ['UC', 'DWB', 'PRWB']
         fit = MOS_IV_Fit(self.param, targets, 'Step 12')
-        fit.setDataSource(     self.IdVg_LW_lin_ba + 
-                          0.1 *self.IdVg_MW_lin_ba +
-                          0.05*self.IdVg_SW_lin_ba +
-                          10. *self.IdVg_LN_lin_ba +
-                          2.0*self.IdVg_LM_lin_ba)
+        fit.setDataSource(       self.IdVg_LW_lin_ba +
+                          0.1  * self.IdVg_MW_lin_ba +
+                          0.05 * self.IdVg_SW_lin_ba +
+                          5.   * self.IdVg_LM_lin_ba +
+                          10.  * self.IdVg_LN_lin_ba)
 
         result,err = fit.doFit()
         fit.visualize(result, timeout=0.0)
@@ -326,5 +325,5 @@ param0['TEMP']=25.
 param0['TNOM']=25.
 
 proj = MOSp35Proj(param0)
-proj.run(0,50)
+proj.run(0,120)
 
