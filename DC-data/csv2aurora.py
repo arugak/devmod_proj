@@ -55,9 +55,16 @@ Vgs   Vbs    Vds  n1 n2 n3 n4 n5  MeasNum
      -2.5         *  *  *        "
      -3.0         *  *  *        "
 
+
 *** IdVd
-Vds   Vg    Vb    TegName
-      0.0   0.0   1  2  3  4  5
+                 TegName
+Vds   Vgs   Vbs  n1 n2 n3 n4 n5  MeasNum
+      2.5   0.0   *  *  *        6n
+           -0.5   *  *  *
+           -1.0   *  *  *
+           -1.5   *  *  *
+           -2.0   *  *  *
+      0.0   0.0   *  *  *  *  *  {7n, 8n}
       0.5         *  *  *  *  *
       1.0         *  *  *  *  *
       1.5         *  *  *  *  *
@@ -68,7 +75,7 @@ Vds   Vg    Vb    TegName
       4.0         *  *  *  *  *
       4.5         *  *  *  *  *
       5.0         *  *  *  *  *
-      0.0   -5.0  *  *  *
+      0.0   -5.0  *  *  *        9n
       1.0         *  *  *
       2.0         *  *  *
       3.0         *  *  *
@@ -115,7 +122,7 @@ DevSize = {'n1': {'L':0.6e-6, 'W':15.e-6, 'M':1.},
            'n5': {'L':15.e-6, 'W':1.8e-6, 'M':8.},
            }
 
-Vstep = 0.05
+Vstep = 0.01
 
 # IdVg curve
 for TegName, FileList in CSV_IdVg.items():
