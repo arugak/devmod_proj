@@ -59,11 +59,13 @@ Vgs   Vbs    Vds  n1 n2 n3 n4 n5  MeasNum
 *** IdVd
                  TegName
 Vds   Vgs   Vbs  n1 n2 n3 n4 n5  MeasNum
-      2.5   0.0   *  *  *        6n
+      2.5   0.0   *  *  *        6n       <-- {7n, 8n}と重複するのでcsvから削除
            -0.5   *  *  *
            -1.0   *  *  *
            -1.5   *  *  *
            -2.0   *  *  *
+           -2.5      *                    <-- ？何故かn2だけ
+           -3.0      *
       0.0   0.0   *  *  *  *  *  {7n, 8n}
       0.5         *  *  *  *  *
       1.0         *  *  *  *  *
@@ -88,31 +90,43 @@ import numpy as np
 # Teg Name to CSV file list Map
 # 2n-n3.csv == 1n-n3.csv == 3n-n3.csv
 CSV_IdVg = {
-    'n1': ('2n-n1-170327.csv','5n-n1.csv'),
-    'n2': ('2n-n2-170327.csv','5n-n2.csv'),
-    'n3': ('2n-n3.csv','5n-n3.csv'),
+    'n1': ('2n-n1-170327.csv','4n-n1.csv','5n-n1.csv'),
+    'n2': ('2n-n2-170327.csv','4n-n2.csv','5n-n2.csv'),
+    'n3': ('2n-n3.csv',       '4n-n3.csv','5n-n3.csv'),
     'n4': ('3n-n4.csv',),
     'n5': ('3n-n5.csv',),
 }
 
 CSV_IdVd = {
-    'n1': ('7n-n1.csv',),
-    'n2': ('7n-n2.csv',),
-    'n3': ('7n-n3.csv',),
+    'n1': ('7n-n1.csv','6n-n1.csv'),
+    'n2': ('7n-n2.csv','6n-n2.csv'),
+    'n3': ('7n-n3.csv','6n-n3.csv'),
     'n4': ('8n-n4.csv',),
-    'n5': ('8n-n5.csv',),}
+    'n5': ('8n-n5.csv',),
+}
 
 Vconst = {
-    # Vds for IdVg curve
-    '2n-n1-170327.csv': 0.05,
-    '2n-n2-170327.csv': 0.05,
-    '2n-n3.csv': 0.05,
-    '3n-n4.csv': 0.05,
-    '3n-n5.csv': 0.05,
-    '5n-n1.csv': 5.0,
-    '5n-n2.csv': 5.0,
-    '5n-n3.csv': 5.0,
+    '2n-n1-170327.csv': ('Vd', 0.05),
+    '2n-n2-170327.csv': ('Vd', 0.05),
+    '2n-n3.csv': ('Vd', 0.05),
+    '3n-n4.csv': ('Vd', 0.05),
+    '3n-n5.csv': ('Vd', 0.05),
+    '4n-n1.csv': ('Vb', -5.0),
+    '4n-n2.csv': ('Vb', -5.0),
+    '4n-n3.csv': ('Vb', -5.0),
+    '5n-n1.csv': ('Vd', 5.0),
+    '5n-n2.csv': ('Vd', 5.0),
+    '5n-n3.csv': ('Vd', 5.0),
+    '6n-n1.csv': ('Vg', 2.5),
+    '6n-n2.csv': ('Vg', 2.5),
+    '6n-n3.csv': ('Vg', 2.5),
+    '7n-n1.csv': ('Vb', 0.0),
+    '7n-n2.csv': ('Vb', 0.0),
+    '7n-n3.csv': ('Vb', 0.0),
+    '8n-n4.csv': ('Vb', 0.0),
+    '8n-n5.csv': ('Vb', 0.0),
 }
+
 
 # Teg Name to Device Properties Map
 DevSize = {'n1': {'L':0.6e-6, 'W':15.e-6, 'M':1.},
@@ -122,7 +136,7 @@ DevSize = {'n1': {'L':0.6e-6, 'W':15.e-6, 'M':1.},
            'n5': {'L':15.e-6, 'W':1.8e-6, 'M':8.},
            }
 
-Vstep = 0.01
+Vstep = 0.1
 
 # IdVg curve
 for TegName, FileList in CSV_IdVg.items():
@@ -137,12 +151,19 @@ for TegName, FileList in CSV_IdVg.items():
 
     for file in FileList:
         src = np.loadtxt(file, delimiter=',', skiprows=1)
+        const, volt = Vconst[file]
         vgs = src[:,0]
-        vbs = src[:,1]
+        if const == 'Vd':
+            vbs = src[:, 1]
+            vds = [volt] * len(vgs)
+        elif const == 'Vb':
+            vbs = [volt] * len(vgs)
+            vds = src[:, 1]
+        #id = src[:, 3]/ DevSize[TegName]['M']
         id = (src[:,2]+src[:,3])/2./DevSize[TegName]['M']
         for col in range(vgs.shape[0]):
             if round(vgs[col]*1e3) % round(Vstep*1e3) == 0:
-                print("%e   %e   %e   %e" % (vgs[col], vbs[col], Vconst[file], id[col]))
+                print("%e   %e   %e   %e" % (vgs[col], vbs[col], vds[col], id[col]))
     print ("")
 
 # IdVd curve
@@ -158,10 +179,17 @@ for TegName, FileList in CSV_IdVd.items():
 
     for file in FileList:
         src = np.loadtxt(file, delimiter=',', skiprows=1)
+        const, volt = Vconst[file]
         vds = src[:,0]
-        vgs = src[:,1]
+        if const == 'Vg':
+            vgs = [volt] * len(vds)
+            vbs = src[:,1]
+        elif const == 'Vb':
+            vgs = src[:,1]
+            vbs = [volt] * len(vds)
+        #id = src[:, 3] / DevSize[TegName]['M']
         id = (src[:,2]+src[:,3])/2./DevSize[TegName]['M']
         for col in range(vds.shape[0]):
             if round(vds[col]*1e3) % round(Vstep*1e3) == 0:
-                print("%e   %e   %e   %e" % (vds[col], vgs[col], 0., id[col]))
+                print("%e   %e   %e   %e" % (vds[col], vgs[col], vbs[col], id[col]))
     print ("")
