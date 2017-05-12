@@ -1,4 +1,3 @@
-from pyEDA.Compact.AuroraData import *
 from pyEDA.Compact.MOSParamFit import *
 
 
@@ -189,39 +188,6 @@ class MOSp35Data(MOS_FitProject):
         self.IdVg_LW_sat_b0 = dsrc
         self.IdVg_LW_sat_b0.curr_min = 5e-8
 
-        # ---
-
-
-        '''
-        #---
-        # IdVg, long/wide , Vd=1, all Vb
-        dsrc = MOS_IV_FitData('IdVg, long/wide , Vd=1, all Vb')
-        ds = self.datasets['n15x15.gtr']
-        dsrc.addCurve(ds.mosID(), ds.getCurve('Vgs', {'Vbs':0.,     'Vds':1.0}, 'Id'))
-        dsrc.addCurve(ds.mosID(), ds.getCurve('Vgs', {'Vbs':-1.1,   'Vds':1.0}, 'Id'))
-        dsrc.addCurve(ds.mosID(), ds.getCurve('Vgs', {'Vbs':-2.2,   'Vds':1.0}, 'Id'))
-        dsrc.addCurve(ds.mosID(), ds.getCurve('Vgs', {'Vbs':-3.3,   'Vds':1.0}, 'Id'))
-        self.IdVg_LW_d1_ba = dsrc
-
-        # IdVg, mid/wide, Vd=1, all Vb
-        dsrc = MOS_IV_FitData('IdVg, mid/wide, Vd=1, all Vb')
-        ds = self.datasets['n15x1p8.gtr']
-        dsrc.addCurve(ds.mosID(), ds.getCurve('Vgs', {'Vbs':0.,     'Vds':1.0}, 'Id'))
-        dsrc.addCurve(ds.mosID(), ds.getCurve('Vgs', {'Vbs':-1.1,   'Vds':1.0}, 'Id'))
-        dsrc.addCurve(ds.mosID(), ds.getCurve('Vgs', {'Vbs':-2.2,   'Vds':1.0}, 'Id'))
-        dsrc.addCurve(ds.mosID(), ds.getCurve('Vgs', {'Vbs':-3.3,   'Vds':1.0}, 'Id'))
-        self.IdVg_MW_d1_ba = dsrc
-
-        # IdVg, short/wide, Vd=1, all Vb
-        dsrc = MOS_IV_FitData('IdVg, short/wide, Vd=1, all Vb')
-        ds = self.datasets['n15x0p6.gtr']
-        dsrc.addCurve(ds.mosID(), ds.getCurve('Vgs', {'Vbs':0.,     'Vds':1.0}, 'Id'))
-        dsrc.addCurve(ds.mosID(), ds.getCurve('Vgs', {'Vbs':-1.1,   'Vds':1.0}, 'Id'))
-        dsrc.addCurve(ds.mosID(), ds.getCurve('Vgs', {'Vbs':-2.2,   'Vds':1.0}, 'Id'))
-        dsrc.addCurve(ds.mosID(), ds.getCurve('Vgs', {'Vbs':-3.3,   'Vds':1.0}, 'Id'))
-        self.IdVg_SW_d1_ba = dsrc
-
-        '''
         #---
         # IdVg, short/wide, saturation region, all Vb
         dsrc = MOS_IV_FitData('IdVg, short/wide, saturation region, all Vb')
@@ -266,8 +232,8 @@ class MOSp35Data(MOS_FitProject):
         # IdVd, short/wide , zero Vb
         dsrc = MOS_IV_FitData('IdVd, short/wide , zero Vb')
         ds = self.datasets['n1.drr']
-        dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':0.,     'Vgs':0.0}, 'Id'))
-        dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':0.,     'Vgs':0.5}, 'Id'))
+        #dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':0.,     'Vgs':0.0}, 'Id'))
+        #dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':0.,     'Vgs':0.5}, 'Id'))
         dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':0.,     'Vgs':1.0}, 'Id'))
         dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':0.,     'Vgs':1.5}, 'Id'))
         dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':0.,     'Vgs':2.0}, 'Id'))
@@ -282,8 +248,8 @@ class MOSp35Data(MOS_FitProject):
         # IdVd, mid/wide , zero Vb
         dsrc = MOS_IV_FitData('IdVd, mid/wide , zero Vb')
         ds = self.datasets['n2.drr']
-        dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':0.,     'Vgs':0.0}, 'Id'))
-        dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':0.,     'Vgs':0.5}, 'Id'))
+        #dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':0.,     'Vgs':0.0}, 'Id'))
+        #dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':0.,     'Vgs':0.5}, 'Id'))
         dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':0.,     'Vgs':1.0}, 'Id'))
         dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':0.,     'Vgs':1.5}, 'Id'))
         dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':0.,     'Vgs':2.0}, 'Id'))
@@ -298,8 +264,8 @@ class MOSp35Data(MOS_FitProject):
         # IdVd, long/wide , zero Vb
         dsrc = MOS_IV_FitData('IdVd, long/wide , zero Vb')
         ds = self.datasets['n3.drr']
-        dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':0.,     'Vgs':0.0}, 'Id'))
-        dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':0.,     'Vgs':0.5}, 'Id'))
+        #dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':0.,     'Vgs':0.0}, 'Id'))
+        #dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':0.,     'Vgs':0.5}, 'Id'))
         dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':0.,     'Vgs':1.0}, 'Id'))
         dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':0.,     'Vgs':1.5}, 'Id'))
         dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':0.,     'Vgs':2.0}, 'Id'))
@@ -314,8 +280,8 @@ class MOSp35Data(MOS_FitProject):
         # IdVd, long/mid, zero Vb
         dsrc = MOS_IV_FitData('IdVd, long/mid, zero Vb')
         ds = self.datasets['n4.drr']
-        dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':0.,     'Vgs':0.0}, 'Id'))
-        dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':0.,     'Vgs':0.5}, 'Id'))
+        #dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':0.,     'Vgs':0.0}, 'Id'))
+        #dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':0.,     'Vgs':0.5}, 'Id'))
         dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':0.,     'Vgs':1.0}, 'Id'))
         dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':0.,     'Vgs':1.5}, 'Id'))
         dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':0.,     'Vgs':2.0}, 'Id'))
@@ -330,8 +296,8 @@ class MOSp35Data(MOS_FitProject):
         # IdVd, long/narrow, zero Vb
         dsrc = MOS_IV_FitData('IdVd, long/narrow, zero Vb')
         ds = self.datasets['n5.drr']
-        dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':0.,     'Vgs':0.0}, 'Id'))
-        dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':0.,     'Vgs':0.5}, 'Id'))
+        #dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':0.,     'Vgs':0.0}, 'Id'))
+        #dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':0.,     'Vgs':0.5}, 'Id'))
         dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':0.,     'Vgs':1.0}, 'Id'))
         dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':0.,     'Vgs':1.5}, 'Id'))
         dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':0.,     'Vgs':2.0}, 'Id'))
@@ -344,20 +310,50 @@ class MOSp35Data(MOS_FitProject):
         self.IdVd_LN_b0 = dsrc
 
         #---
-        # IdVd, short/wide , Vgs=5.0V, Vbs=0.0V
-        dsrc = MOS_IV_FitData('IdVd, short/wide , Vgs=5.0V, Vbs=0.0V')
+        # IdVd, short/wide , zero Vb
+        dsrc = MOS_IV_FitData('IdVd, short/wide , Vb=-5')
         ds = self.datasets['n1.drr']
-        dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':0.,     'Vgs':5.0}, 'Id'))
-        self.IdVd_SW_d5_b0 = dsrc
+        #dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':-5.0,     'Vgs':0.0}, 'Id'))
+        #dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':-5.0,     'Vgs':0.5}, 'Id'))
+        dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':-5.0,     'Vgs':1.0}, 'Id'))
+        dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':-5.0,     'Vgs':1.5}, 'Id'))
+        dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':-5.0,     'Vgs':2.0}, 'Id'))
+        dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':-5.0,     'Vgs':2.5}, 'Id'))
+        dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':-5.0,     'Vgs':3.0}, 'Id'))
+        dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':-5.0,     'Vgs':3.5}, 'Id'))
+        dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':-5.0,     'Vgs':4.0}, 'Id'))
+        dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':-5.0,     'Vgs':4.5}, 'Id'))
+        dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':-5.0,     'Vgs':5.0}, 'Id'))
+        self.IdVd_SW_b5 = dsrc
 
-        # IdVd, mid/wide , Vgs=5.0V, Vbs=0.0V
-        dsrc = MOS_IV_FitData('IdVd, mid/wide , Vgs=5.0V, Vbs=0.0V')
+        # IdVd, mid/wide , zero Vb
+        dsrc = MOS_IV_FitData('IdVd, mid/wide , Vb=-5')
         ds = self.datasets['n2.drr']
-        dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':0.,     'Vgs':5.0}, 'Id'))
-        self.IdVd_MW_d5_b0 = dsrc
+        #dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':-5.0,     'Vgs':0.0}, 'Id'))
+        #dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':-5.0,     'Vgs':0.5}, 'Id'))
+        dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':-5.0,     'Vgs':1.0}, 'Id'))
+        dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':-5.0,     'Vgs':1.5}, 'Id'))
+        dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':-5.0,     'Vgs':2.0}, 'Id'))
+        dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':-5.0,     'Vgs':2.5}, 'Id'))
+        dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':-5.0,     'Vgs':3.0}, 'Id'))
+        dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':-5.0,     'Vgs':3.5}, 'Id'))
+        dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':-5.0,     'Vgs':4.0}, 'Id'))
+        dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':-5.0,     'Vgs':4.5}, 'Id'))
+        dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':-5.0,     'Vgs':5.0}, 'Id'))
+        self.IdVd_MW_b5 = dsrc
 
-        # IdVd, long/wide , Vgs=5.0V, Vbs=0.0V
-        dsrc = MOS_IV_FitData('IdVd, long/wide , Vgs=5.0V, Vbs=0.0V')
+        # IdVd, long/wide , zero Vb
+        dsrc = MOS_IV_FitData('IdVd, long/wide , Vb=-5')
         ds = self.datasets['n3.drr']
-        dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':0.,     'Vgs':5.0}, 'Id'))
-        self.IdVd_LW_d5_b0 = dsrc
+        #dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':-5.0,     'Vgs':0.0}, 'Id'))
+        #dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':-5.0,     'Vgs':0.5}, 'Id'))
+        dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':-5.0,     'Vgs':1.0}, 'Id'))
+        dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':-5.0,     'Vgs':1.5}, 'Id'))
+        dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':-5.0,     'Vgs':2.0}, 'Id'))
+        dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':-5.0,     'Vgs':2.5}, 'Id'))
+        dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':-5.0,     'Vgs':3.0}, 'Id'))
+        dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':-5.0,     'Vgs':3.5}, 'Id'))
+        dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':-5.0,     'Vgs':4.0}, 'Id'))
+        dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':-5.0,     'Vgs':4.5}, 'Id'))
+        dsrc.addCurve(ds.mosID(), ds.getCurve('Vds', {'Vbs':-5.0,     'Vgs':5.0}, 'Id'))
+        self.IdVd_LW_b5 = dsrc

@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-from pyEDA.Compact.AuroraData import *
-from pyEDA.Compact.MOSParamFit import *
 
 from BSIM3v3Param import *
 from MOSp35Data import *
@@ -23,7 +21,7 @@ class MOSp35Proj(MOSp35Data):
         return result, err
 
 
-    def skip_step30(self):
+    def step30(self):
         #targets = ['NFACTOR', 'VOFF']
         targets = ['VOFF']
         fit = MOS_IV_Fit(self.param, targets, 'Step 3')
@@ -110,7 +108,8 @@ class MOSp35Proj(MOSp35Data):
 
 
     def step130(self):
-        targets = ['A0', 'AGS', 'VSAT']
+        #targets = ['A0', 'AGS', 'VSAT']
+        targets = ['A0', 'AGS', 'VSAT', 'A1', 'A2', 'DELTA']
         fit = MOS_IV_Fit(self.param, targets, 'Step 13')
         fit.setDataSource( 0.1 * self.IdVd_SW_b0+
                            0.2 * self.IdVd_MW_b0+
@@ -121,20 +120,18 @@ class MOSp35Proj(MOSp35Data):
         self.acceptParam(result, targets)
         return result, err
 
-
     def step132(self):
-        targets = ['ETA0', 'DSUB']
+        #targets = ['A0', 'AGS', 'VSAT']
+        targets = ['A0', 'AGS', 'VSAT', 'A1', 'A2', 'PCLM']
         fit = MOS_IV_Fit(self.param, targets, 'Step 13-2')
-        fit.setDataSource( 0.1 * self.IdVg_SW_sat_b0+
-                           0.2 * self.IdVg_MW_sat_b0+
-                           1.0 * self.IdVg_LW_sat_b0)
+        fit.setDataSource( 0.1 * self.IdVd_SW_b0+
+                           0.2 * self.IdVd_MW_b0+
+                           1.0 * self.IdVd_LW_b0)
 
-        fit.dataSrc.setSubVth(True)
         result,err = fit.doFit()
         fit.visualize(result, timeout=0.0)
         self.acceptParam(result, targets)
         return result, err
-
 
     def step140(self):
         targets = ['B0', 'B1']
@@ -149,36 +146,12 @@ class MOSp35Proj(MOSp35Data):
         return result, err
 
 
-    def step150(self):
-        targets = ['ETA0', 'DSUB']
-        fit = MOS_IV_Fit(self.param, targets, 'Step 15')
-        fit.setDataSource( 0.1 * self.IdVd_SW_b0 +
-                           0*0.2 * self.IdVd_MW_b0 +
-                           0*1.0 * self.IdVd_LW_b0 )
-
-        result,err = fit.doFit()
-        fit.visualize(result, timeout=0.0)
-        self.acceptParam(result, targets)
-        return result, err
-
-    def step160(self):
-        targets = ['ETA0', 'DSUB', 'PCLM', 'PDIBLC1', 'PDIBLC2', 'A1', 'A2']
-        fit = MOS_IV_Fit(self.param, targets, 'Step 16')
-        fit.setDataSource( 0.1 * self.IdVd_SW_b0 +
-                           0.2 * self.IdVd_MW_b0 +
-                           1.0 * self.IdVd_LW_b0 )
-
-        result,err = fit.doFit()
-        fit.visualize(result, timeout=0.0)
-        self.acceptParam(result, targets)
-        return result, err
-
     def step170(self):
-        targets = ['ETA0', 'DSUB', 'A0', 'A1']
+        targets = ['ETA0', 'DSUB']
         fit = MOS_IV_Fit(self.param, targets, 'Step 17')
         fit.setDataSource(     self.IdVg_LW_sat_b0+ 
-                          0.1 *self.IdVg_MW_sat_b0+
-                          0.05*self.IdVg_SW_sat_b0)
+                          0.2 *self.IdVg_MW_sat_b0+
+                          0.1 *self.IdVg_SW_sat_b0)
 
         result,err = fit.doFit()
         fit.visualize(result, timeout=0.0)
@@ -199,12 +172,12 @@ class MOSp35Proj(MOSp35Data):
         return result, err
 
 
-    def skip_step200(self):
+    def step200(self):
         targets = ['CDSCD']
         fit = MOS_IV_Fit(self.param, targets, 'Step 20')
-        fit.setDataSource(      self.IdVg_LW_sat_b0+
-                          0.2 * self.IdVg_MW_sat_b0+
-                          0.1 * self.IdVg_SW_sat_b0)
+        fit.setDataSource(      self.IdVg_LW_sat_b0.copy()+
+                          0.2 * self.IdVg_MW_sat_b0.copy()+
+                          0.1 * self.IdVg_SW_sat_b0.copy())
 
         fit.dataSrc.setSubVth(True)
         result,err = fit.doFit()
@@ -216,9 +189,9 @@ class MOSp35Proj(MOSp35Data):
     def step205(self):
         targets = ['CDSCB']
         fit = MOS_IV_Fit(self.param, targets, 'Step 20-5')
-        fit.setDataSource(0*     self.IdVg_LW_sat_ba+
-                          0*0.2 *self.IdVg_MW_sat_ba+
-                          0*0.1 *self.IdVg_SW_sat_ba)
+        fit.setDataSource(0*     self.IdVg_LW_sat_ba.copy()+
+                          0*0.2 *self.IdVg_MW_sat_ba.copy()+
+                          0*0.1 *self.IdVg_SW_sat_ba.copy())
 
         fit.dataSrc.setSubVth(True)
         result,err = fit.doFit()
@@ -227,9 +200,48 @@ class MOSp35Proj(MOSp35Data):
 
         return result, err
 
+    def step300(self):
+        targets = ['VTH0'] # dummy
+        fit = MOS_IV_Fit(self.param, targets, 'Step 300')
+        fit.setDataSource(
+            0 * self.IdVg_LW_lin_ba +
+            0 * self.IdVg_MW_lin_ba +
+            0 * self.IdVg_SW_lin_ba +
+            0 * self.IdVg_LM_lin_ba +
+            0 * self.IdVg_LN_lin_ba +
+            0 * self.IdVg_LW_sat_ba +
+            0 * self.IdVg_MW_sat_ba +
+            0 * self.IdVg_SW_sat_ba +
+            0 * self.IdVd_SW_b0 +
+            0 * self.IdVd_MW_b0 +
+            0 * self.IdVd_LW_b0 +
+            0 * self.IdVd_LM_b0 +
+            0 * self.IdVd_LN_b0
+        )
+
+        result,err = fit.doFit()
+        fit.visualize(result, timeout=0.0)
+        self.acceptParam(result, targets)
+
+        i = 0
+        s = ''
+        keys = self.param.keys()
+        keys.sort()
+        for k in keys:
+            v = self.param[k]
+            if isinstance(v, tuple):
+                v = v[0]
+            s += '+ %-8s= %-12G\n' % (k, v)
+            i += 1
+
+        f = open('pyeda.l', 'w')
+        f.write(s)
+        f.close() # ????????
+        return result, err
+
 param0['TEMP']=25.
 param0['TNOM']=25.
 
 proj = MOSp35Proj(param0)
-proj.run(0,205)
+proj.run(300,300)
 
