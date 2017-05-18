@@ -1,5 +1,7 @@
-
 # -*- coding: utf-8 -*-
+
+#PTS16のCV測定結果から、プロットを作成する
+
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -22,7 +24,7 @@ import numpy as np
 #16 Nwell-Psub  9
 #17 OPEN        1
 
-for num_prefix in ('01','02','03','04','05','07','08','09','10','11','12','13','14','15','16'):
+for num_prefix in ('01','02','03','04','05','07','06','08','09','10','11','12','13','14','15','16'):
     fig = plt.figure()
     for model in ('CSRS','CPRP'):
         if model == 'CSRS':
