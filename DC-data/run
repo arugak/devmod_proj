@@ -1,0 +1,4 @@
+
+python pts16aurora.py 0.1  > aurora_100mv.dat
+python pts16aurora.py 0.05 > aurora_50mv.dat
+python pts16aurora.py 0.01 > aurora_10mv.dat
