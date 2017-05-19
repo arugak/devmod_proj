@@ -1,0 +1,3 @@
+
+python ext_mpar.py nmos > nmos_cv.l
+python ext_mpar.py pmos > pmos_cv.l
