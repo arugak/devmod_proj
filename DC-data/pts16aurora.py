@@ -85,8 +85,16 @@ Vds   Vgs   Vbs  n1 n2 n3 n4 n5  MeasNum
       5.0         *  *  *
 '''
 
+import re
+import sys
+
 import numpy as np
 
+args = sys.argv
+if len(args) == 2:
+    Vstep = float(args[1])
+else:
+    Vstep = 0.01
 # Teg Name to CSV file list Map
 # 2n-n3.csv == 1n-n3.csv == 3n-n3.csv
 CSV_IdVg = {
@@ -95,6 +103,11 @@ CSV_IdVg = {
     'n3': ('2n-n3.csv',       '4n-n3.csv','5n-n3.csv'),
     'n4': ('3n-n4.csv',),
     'n5': ('3n-n5.csv',),
+    'p1': ('2p-p1.csv', '4p-p1.csv', '5p-p1.csv'),
+    'p2': ('2p-p2.csv', '4p-p2.csv', '5p-p2.csv'),
+    'p3': ('2p-p3.csv', '4p-p3.csv', '5p-p3.csv'),
+    'p4': ('3p-p4.csv',),
+    'p5': ('3p-p5.csv',),
 }
 
 CSV_IdVd = {
@@ -103,6 +116,11 @@ CSV_IdVd = {
     'n3': ('7n-n3.csv','6n-n3.csv'),
     'n4': ('8n-n4.csv',),
     'n5': ('8n-n5.csv',),
+    'p1': ('7p-p1.csv', '6p-p1.csv'),
+    'p2': ('7p-p2.csv', '6p-p2.csv'),
+    'p3': ('7p-p3.csv', '6p-p3.csv'),
+    'p4': ('8p-p4.csv',),
+    'p5': ('8p-p5.csv',),
 }
 
 Vconst = {
@@ -125,6 +143,25 @@ Vconst = {
     '7n-n3.csv': ('Vb', 0.0),
     '8n-n4.csv': ('Vb', 0.0),
     '8n-n5.csv': ('Vb', 0.0),
+    '2p-p1.csv': ('Vd', 0.05),
+    '2p-p2.csv': ('Vd', 0.05),
+    '2p-p3.csv': ('Vd', 0.05),
+    '3p-p4.csv': ('Vd', 0.05),
+    '3p-p5.csv': ('Vd', 0.05),
+    '4p-p1.csv': ('Vb', -5.0),
+    '4p-p2.csv': ('Vb', -5.0),
+    '4p-p3.csv': ('Vb', -5.0),
+    '5p-p1.csv': ('Vd', 5.0),
+    '5p-p2.csv': ('Vd', 5.0),
+    '5p-p3.csv': ('Vd', 5.0),
+    '6p-p1.csv': ('Vg', 2.5),
+    '6p-p2.csv': ('Vg', 2.5),
+    '6p-p3.csv': ('Vg', 2.5),
+    '7p-p1.csv': ('Vb', 0.0),
+    '7p-p2.csv': ('Vb', 0.0),
+    '7p-p3.csv': ('Vb', 0.0),
+    '8p-p4.csv': ('Vb', 0.0),
+    '8p-p5.csv': ('Vb', 0.0),
 }
 
 
@@ -134,9 +171,12 @@ DevSize = {'n1': {'L':0.6e-6, 'W':15.e-6, 'M':1.},
            'n3': {'L':15.e-6, 'W':15.e-6, 'M':1.},
            'n4': {'L':15.e-6, 'W':3.0e-6, 'M':5.},
            'n5': {'L':15.e-6, 'W':1.8e-6, 'M':8.},
+           'p1': {'L':0.6e-6, 'W':15.e-6, 'M':1.},
+           'p2': {'L':1.8e-6, 'W':15.e-6, 'M':1.},
+           'p3': {'L':15.e-6, 'W':15.e-6, 'M':1.},
+           'p4': {'L':15.e-6, 'W':3.0e-6, 'M':5.},
+           'p5': {'L':15.e-6, 'W':1.8e-6, 'M':8.},
            }
-
-Vstep = 0.1
 
 # IdVg curve
 for TegName, FileList in CSV_IdVg.items():
@@ -152,15 +192,21 @@ for TegName, FileList in CSV_IdVg.items():
     for file in FileList:
         src = np.loadtxt(file, delimiter=',', skiprows=1)
         const, volt = Vconst[file]
-        vgs = src[:,0]
+
+        if re.match(r".p", file): # pmos
+            type = -1
+        else:
+            type = 1
+
+        vgs = src[:,0] * type
         if const == 'Vd':
-            vbs = src[:, 1]
+            vbs = src[:, 1] * type
             vds = [volt] * len(vgs)
         elif const == 'Vb':
             vbs = [volt] * len(vgs)
-            vds = src[:, 1]
+            vds = src[:, 1] * type
         #id = src[:, 3]/ DevSize[TegName]['M']
-        id = (src[:,2]+src[:,3])/2./DevSize[TegName]['M']
+        id = (src[:,2]+src[:,3])/2./DevSize[TegName]['M'] * type
         for col in range(vgs.shape[0]):
             if round(vgs[col]*1e3) % round(Vstep*1e3) == 0:
                 print("%e   %e   %e   %e" % (vgs[col], vbs[col], vds[col], id[col]))
@@ -180,15 +226,21 @@ for TegName, FileList in CSV_IdVd.items():
     for file in FileList:
         src = np.loadtxt(file, delimiter=',', skiprows=1)
         const, volt = Vconst[file]
-        vds = src[:,0]
+
+        if re.match(r".p", file): # pmos
+            type = -1
+        else:
+            type = 1
+
+        vds = src[:,0] * type
         if const == 'Vg':
             vgs = [volt] * len(vds)
-            vbs = src[:,1]
+            vbs = src[:,1] * type
         elif const == 'Vb':
-            vgs = src[:,1]
+            vgs = src[:,1] * type
             vbs = [volt] * len(vds)
         #id = src[:, 3] / DevSize[TegName]['M']
-        id = (src[:,2]+src[:,3])/2./DevSize[TegName]['M']
+        id = (src[:,2]+src[:,3])/2./DevSize[TegName]['M'] * type
         for col in range(vds.shape[0]):
             if round(vds[col]*1e3) % round(Vstep*1e3) == 0:
                 print("%e   %e   %e   %e" % (vds[col], vgs[col], vbs[col], id[col]))
