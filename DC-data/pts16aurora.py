@@ -59,13 +59,13 @@ Vgs   Vbs    Vds  n1 n2 n3 n4 n5  MeasNum
 *** IdVd
                  TegName
 Vds   Vgs   Vbs  n1 n2 n3 n4 n5  MeasNum
-      2.5   0.0   *  *  *        6n       <-- {7n, 8n}と重複するのでcsvから削除
+      2.5   0.0   *  *  *        6n,6p    <-- {7n, 8n}と重複するのでcsvから削除
            -0.5   *  *  *
            -1.0   *  *  *
            -1.5   *  *  *
            -2.0   *  *  *
-           -2.5      *                    <-- ？何故かn2だけ
-           -3.0      *
+           -2.5      *                    <-- 6n-n2しか無い
+           -3.0      *                    <--  "
       0.0   0.0   *  *  *  *  *  {7n, 8n}
       0.5         *  *  *  *  *
       1.0         *  *  *  *  *
@@ -90,11 +90,13 @@ import sys
 
 import numpy as np
 
+# 電圧の間隔、デフォルト10mV
 args = sys.argv
 if len(args) == 2:
     Vstep = float(args[1])
 else:
     Vstep = 0.01
+
 # Teg Name to CSV file list Map
 # 2n-n3.csv == 1n-n3.csv == 3n-n3.csv
 CSV_IdVg = {
@@ -111,9 +113,9 @@ CSV_IdVg = {
 }
 
 CSV_IdVd = {
-    'n1': ('7n-n1.csv','6n-n1.csv'),
-    'n2': ('7n-n2.csv','6n-n2.csv'),
-    'n3': ('7n-n3.csv','6n-n3.csv'),
+    'n1': ('7n-n1.csv','6n-n1.csv','9n-n1_id.csv'),
+    'n2': ('7n-n2.csv','6n-n2.csv','9n-n2_id.csv'),
+    'n3': ('7n-n3.csv','6n-n3.csv','9n-n3_id.csv'),
     'n4': ('8n-n4.csv',),
     'n5': ('8n-n5.csv',),
     'p1': ('7p-p1.csv', '6p-p1.csv'),
@@ -143,6 +145,9 @@ Vconst = {
     '7n-n3.csv': ('Vb', 0.0),
     '8n-n4.csv': ('Vb', 0.0),
     '8n-n5.csv': ('Vb', 0.0),
+    '9n-n1_id.csv': ('Vb', -5.0),
+    '9n-n2_id.csv': ('Vb', -5.0),
+    '9n-n3_id.csv': ('Vb', -5.0),
     '2p-p1.csv': ('Vd', 0.05),
     '2p-p2.csv': ('Vd', 0.05),
     '2p-p3.csv': ('Vd', 0.05),
@@ -163,7 +168,6 @@ Vconst = {
     '8p-p4.csv': ('Vb', 0.0),
     '8p-p5.csv': ('Vb', 0.0),
 }
-
 
 # Teg Name to Device Properties Map
 DevSize = {'n1': {'L':0.6e-6, 'W':15.e-6, 'M':1.},
@@ -205,7 +209,6 @@ for TegName, FileList in CSV_IdVg.items():
         elif const == 'Vb':
             vbs = [volt] * len(vgs)
             vds = src[:, 1] * type
-        #id = src[:, 3]/ DevSize[TegName]['M']
         id = (src[:,2]+src[:,3])/2./DevSize[TegName]['M'] * type
         for col in range(vgs.shape[0]):
             if round(vgs[col]*1e3) % round(Vstep*1e3) == 0:
