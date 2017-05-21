@@ -216,7 +216,10 @@ class MOSp35Proj(MOSp35Data):
             0 * self.IdVd_MW_b0 +
             0 * self.IdVd_LW_b0 +
             0 * self.IdVd_LM_b0 +
-            0 * self.IdVd_LN_b0
+            0 * self.IdVd_LN_b0 +
+            0 * self.IdVd_SW_g25_ba +
+            0 * self.IdVd_MW_g25_ba +
+            0 * self.IdVd_LW_g25_ba
         )
 
         result,err = fit.doFit()
