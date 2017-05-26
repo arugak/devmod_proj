@@ -1,0 +1,5 @@
+
+cat head.nmos ../nmos_iv/pyeda.l ../mos_cv/nmos_cv.l > nmos.l
+
+#ngspice -b -r cggn.raw cggn.sp
+ngspice -b cggn.sp > cggn.log
