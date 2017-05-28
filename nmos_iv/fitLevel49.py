@@ -226,6 +226,26 @@ class MOSp35Proj(MOSp35Data):
         fit.visualize(result, timeout=0.0)
         self.acceptParam(result, targets)
 
+        return result, err
+
+    def step310(self):
+        targets = ['VTH0']  # dummy
+        fit = MOS_IV_Fit(self.param, targets, 'Step 310')
+        fit.setDataSource(
+            0 * self.IdVg_LW_lin_ba +
+            0 * self.IdVg_MW_lin_ba +
+            0 * self.IdVg_SW_lin_ba +
+            0 * self.IdVg_LM_lin_ba +
+            0 * self.IdVg_LN_lin_ba +
+            0 * self.IdVg_LW_sat_ba +
+            0 * self.IdVg_MW_sat_ba +
+            0 * self.IdVg_SW_sat_ba)
+
+        fit.dataSrc.setSubVth(True)
+        result, err = fit.doFit()
+        fit.visualize(result, timeout=0.0)
+        self.acceptParam(result, targets)
+
         i = 0
         s = ''
         keys = self.param.keys()
@@ -234,6 +254,8 @@ class MOSp35Proj(MOSp35Data):
             v = self.param[k]
             if isinstance(v, tuple):
                 v = v[0]
+            if k == 'TEMP':
+                s += '*'
             s += '+ %-8s= %-12G\n' % (k, v)
             i += 1
 
@@ -246,5 +268,5 @@ param0['TEMP']=25.
 param0['TNOM']=25.
 
 proj = MOSp35Proj(param0)
-proj.run(300,300)
+proj.run()
 
