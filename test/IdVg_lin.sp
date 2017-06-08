@@ -1,4 +1,4 @@
-* CggVg
+* IdVg Vd=50mV
 
 m1 d g s b nmos L=0.6u W=15u
 m2 d g s b nmos L=1.8u W=15u
