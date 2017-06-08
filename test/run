@@ -2,3 +2,4 @@
 cat head.nmos ../nmos_iv/pyeda.l ../mos_cv/nmos_cv.l > nmos.l
 
 ngspice -b CggVg.sp > CggVg.log
+ngspice -b IdVg_lin.sp > IdVg_lin.log
