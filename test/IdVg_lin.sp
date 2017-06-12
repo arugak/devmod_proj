@@ -14,7 +14,11 @@ vb b s 0
 .dc vg 0 5 0.1 vb 0 -3.0 -0.5
 
 .temp 25
-.print dc @m1[id] @m2[id] @m3[id] @m4[id] @m5[id]
+.print dc v(b) @m1[id]
+.print dc v(b) @m2[id]
+.print dc v(b) @m3[id]
+.print dc v(b) @m4[id]
+.print dc v(b) @m5[id]
 .include nmos.l
 
 .end

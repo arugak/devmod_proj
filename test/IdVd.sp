@@ -1,4 +1,4 @@
-* IdVg Vd=5V
+* IdVd Vb=0V
 
 m1 d g s b nmos L=0.6u W=15u
 m2 d g s b nmos L=1.8u W=15u
@@ -14,7 +14,12 @@ vb b s 0
 .dc vd 0 5 0.1 vg 0 5.0 0.5
 
 .temp 25
-.print dc @m1[id] @m2[id] @m3[id] @m4[id] @m5[id]
+.print dc v(g) @m1[id]
+.print dc v(g) @m2[id]
+.print dc v(g) @m3[id]
+.print dc v(g) @m4[id]
+.print dc v(g) @m5[id]
+
 .include nmos.l
 
 .end
