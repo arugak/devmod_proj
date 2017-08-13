@@ -327,4 +327,5 @@ param0['TEMP']=25.
 param0['TNOM']=25.
 
 proj = MOSp35Proj(param0)
-1
+proj.run(0, 310)
+
