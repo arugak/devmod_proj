@@ -19,6 +19,6 @@ vb b s 0
 .print dc v(b) @m3[id]
 .print dc v(b) @m4[id]
 .print dc v(b) @m5[id]
-.include pmos.l
+.include mos.lib
 
 .end
