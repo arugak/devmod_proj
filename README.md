@@ -2,11 +2,13 @@
 NDA free [PHENITECH SEMICONDUCTOR](https://www.phenitec.co.jp/en/) CMOS 0.6um SPICE model
 
 - 0.6um CMOS 5V --- PHENITECH SEMICONDUCTOR
-- BSIM3 v3.3.0
+- BSIM3v3
+
+ここから取得できます。--> [mos.lib](https://raw.githubusercontent.com/arugak/devmod_proj/master/test/mos.lib)
 
 ## シミュレータごとの設定
 - SPICE3, LTSpice, ngspice --- 修正なしで利用可能です
-- HSPICE --- Level=8を、Level=53に書き換えてください
+- HSPICE --- Level=8を、Level=53に書き換えてください。これをサボると、全く得体の知れない結果が出ます。
 
 ## これは何？
 このモデル開発は、[MakeLSI:](http://ifdl.jp/make_lsi/)に集まった人たちが行いました。
