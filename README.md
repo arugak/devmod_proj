@@ -19,3 +19,7 @@ NDA free [PHENITECH SEMICONDUCTOR](https://www.phenitec.co.jp/en/) CMOS 0.6um SP
 - 助言等 --- MakeLsi: MLの住人達
 
 半導体デバイスの製造を受託するファウンダリは、ユーザ企業にモデルを提供しますが、一般に、これを利用するためにはNDAを締結する必要があります。そのため、個人が利用することは、ほとんど不可能です。NDAフリーのSPICEモデルは、個人がホビーで利用する場合に役立ちます。
+
+## フィッティングレポート
+- NMOSは[こちら](https://1drv.ms/f/s!Ap5iDg6OrBeipnSHQE7cAM02zFWO)
+- PMOSは[こちら](ttps://1drv.ms/f/s!Ap5iDg6OrBeipwnv4X3Gim7kBCFG)
