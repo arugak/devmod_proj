@@ -22,4 +22,4 @@ NDA free [PHENITECH SEMICONDUCTOR](https://www.phenitec.co.jp/en/) CMOS 0.6um SP
 
 ## フィッティングレポート
 - NMOSは[こちら](https://1drv.ms/f/s!Ap5iDg6OrBeipnSHQE7cAM02zFWO)
-- PMOSは[こちら](ttps://1drv.ms/f/s!Ap5iDg6OrBeipwnv4X3Gim7kBCFG)
+- PMOSは[こちら](https://1drv.ms/f/s!Ap5iDg6OrBeipwnv4X3Gim7kBCFG)
